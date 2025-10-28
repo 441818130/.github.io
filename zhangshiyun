@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健身邀请 - 张诗云</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Comic Neue', cursive;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 8px solid #ff6b95;
+        }
+        
+        h1 {
+            color: #ff6b95;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0 #ffd3e0;
+            font-family: 'Ma Shan Zheng', cursive;
+        }
+        
+        .invite-text {
+            font-size: 1.3rem;
+            color: #5a5a5a;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            background-color: #fff9fc;
+            padding: 20px;
+            border-radius: 15px;
+            border: 3px dashed #ffb6c1;
+        }
+        
+        .name {
+            color: #ff6b95;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .time {
+            color: #ff8fab;
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Comic Neue', cursive;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .accept-btn {
+            background-color: #ff6b95;
+            color: white;
+            flex: 1;
+        }
+        
+        .accept-btn:hover {
+            background-color: #ff4d7d;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 107, 149, 0.4);
+        }
+        
+        .reject-btn {
+            background-color: #b0b0b0;
+            color: white;
+            flex: 1;
+        }
+        
+        .reject-btn:hover {
+            background-color: #999;
+            transform: translateY(-5px);
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff6b95;
+            animation: float 6s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        .gym-icon {
+            font-size: 5rem;
+            margin: 20px 0;
+            color: #ff6b95;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        .response-message {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e8f5e9;
+            border-radius: 15px;
+            border: 3px solid #a5d6a7;
+            color: #2e7d32;
+            font-size: 1.3rem;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .footer {
+            margin-top: 30px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .invite-text {
+                font-size: 1.1rem;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💌 健身邀请 💌</h1>
+        
+        <div class="gym-icon">💪</div>
+        
+        <div class="invite-text">
+            亲爱的 <span class="name">张诗云</span>，<br><br>
+            我想邀请你今晚 <span class="time">8:30</span> 一起去健身房！<br><br>
+            让我们一起挥洒汗水，享受运动带来的快乐吧！✨
+        </div>
+        
+        <div class="buttons">
+            <button class="btn accept-btn" id="acceptBtn">欣然接受 💖</button>
+            <button class="btn reject-btn" id="rejectBtn">婉言拒绝 😢</button>
+        </div>
+        
+        <div class="response-message" id="responseMessage"></div>
+        
+        <div class="footer">
+            💕 期待与你共度美好健身时光 💕
+        </div>
+    </div>
+
+    <script>
+        // 创建漂浮的爱心
+        function createHearts() {
+            const container = document.querySelector('.container');
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(heart);
+            }
+        }
+        
+        // 处理按钮点击事件
+        document.getElementById('acceptBtn').addEventListener('click', function() {
+            const responseMessage = document.getElementById('responseMessage');
+            responseMessage.innerHTML = "太棒了！期待今晚8:30在健身房见到你！💖 我会带上毛巾和水，不见不散哦！";
+            responseMessage.style.display = 'block';
+            document.querySelector('.buttons').style.display = 'none';
+            
+            // 添加庆祝效果
+            createHearts();
+        });
+        
+        document.getElementById('rejectBtn').addEventListener('click', function() {
+            const responseMessage = document.getElementById('responseMessage');
+            responseMessage.innerHTML = "没关系，希望下次有机会可以一起健身！😊 如果你改变主意了，随时联系我哦！";
+            responseMessage.style.display = 'block';
+            document.querySelector('.buttons').style.display = 'none';
+        });
+        
+        // 页面加载完成后创建爱心
+        window.addEventListener('load', createHearts);
+    </script>
+</body>
+</html>
